@@ -24,8 +24,8 @@ from geometry_msgs.msg import Point as PointMsg
 
 
 # * My classes
-from tobii_glasses_pkg.video_capture import VideoCapture   
-from tobii_glasses_pkg.tobii_glasses_buffer import TobiiGlassesBuffer
+from scripts.video_capture import VideoCapture   
+from scripts.tobii_glasses_buffer import TobiiGlassesBuffer
 
 # * Base messages
 from sensor_msgs.msg import Image
@@ -63,7 +63,7 @@ video_resolution = (960, 540)     # (qHD) Default for high framerate, optimal pe
 # Glasses emulation via mouse, very useful for testing
 EMULATE_GLASSES = False
 # Perform initial calibration
-do_calibration = True # Set to false to skip calibration process
+do_calibration = False # Set to false to skip calibration process
 # Send image on topic "tobii_glasses/front_camera"
 send_image = True
 
@@ -280,7 +280,7 @@ class tobiiPublisher(Node):
                 frame = self.draw_circle(frame,gaze_pos)
 
         # * Pack image into message
-        img_msg = self.bridge.cv2_to_imgmsg(frame)
+        img_msg = self.bridge.cv2_to_imgmsg(frame, encoding='bgr8')
         img_msg.header.stamp = self.get_clock().now().to_msg() # TODO: Change to glasses, align with pts?
         img_msg.header.frame_id = "tobii_glasses_frame"
 
