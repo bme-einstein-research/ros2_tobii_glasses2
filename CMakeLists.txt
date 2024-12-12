@@ -41,11 +41,12 @@ install(DIRECTORY
 
 
 # Path to scripts
-#ament_python_install_package(scripts/)
-ament_python_install_package(${PROJECT_NAME})
+ament_python_install_package(scripts)
+# ament_python_install_package(${PROJECT_NAME})
 
 install(PROGRAMS
   scripts/tobii_glasses.py
+  scripts/test_camera_view.py
   scripts/frame_publisher.py
   DESTINATION lib/${PROJECT_NAME}
 )
