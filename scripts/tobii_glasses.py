@@ -63,7 +63,7 @@ video_resolution = (960, 540)     # (qHD) Default for high framerate, optimal pe
 # Glasses emulation via mouse, very useful for testing
 EMULATE_GLASSES = False
 # Perform initial calibration
-do_calibration = False # Set to false to skip calibration process
+do_calibration = True # Set to false to skip calibration process
 # Send image on topic "tobii_glasses/front_camera"
 send_image = True
 
@@ -162,6 +162,7 @@ class tobiiPublisher(Node):
                 print("Setting video refresh rate to 25Hz") 
                 publish_freq = 25
 
+            self.tobii_glasses.set_video_auto_preset() #MODIFICADO AQUI OLHAR
             self.tobii_glasses.start_streaming()
 
             # TODO: To parameter expose
